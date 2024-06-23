@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './navbar.css'
 
-const Navbar = () => {
+const Navbar = ({children}) => {
     const [query, setQuery] = useState("");
 
   return (
@@ -17,9 +17,7 @@ const Navbar = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <p className="num-results">
-          Found <strong>X</strong> results
-        </p>
+        {children}
       </nav>
   )
 }
