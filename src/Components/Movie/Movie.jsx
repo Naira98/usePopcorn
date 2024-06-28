@@ -1,8 +1,13 @@
 import "./movie.css";
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, selectedId, setSelectedId }) => {
+
+
+  const handleSelect = () => {
+    setSelectedId(selectedId === movie.imdbID ? null : movie.imdbID);
+  };
   return (
-    <li>
+    <li onClick={handleSelect}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div className="year">

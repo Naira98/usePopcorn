@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Box.css";
 
-const Box = ({ element }) => {
+const Box = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -12,7 +12,7 @@ const Box = ({ element }) => {
       >
         {isOpen ? "–" : "+"}
       </button>
-      {isOpen && element}
+      {isOpen && children}
     </div>
   );
 };

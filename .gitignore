@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 App.js
 index.css
+.env

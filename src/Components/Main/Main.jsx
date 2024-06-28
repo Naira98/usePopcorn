@@ -1,39 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "../Box/Box";
-import Movie from "../Movie/Movie";
-import "./main.css";
 import WatchedSummary from "../WatchedSummary/WatchedSummary";
 import WatchedMovieList from "../WatchedMovieList/WatchedMovieList";
 import MovieList from "../MovieList/MovieList";
+import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
+import MovieDetails from "../MovieDetails/MovieDetails";
+import "./main.css";
+import useLocalStorage from "../../Hooks/useLocalStorage";
 
-const tempWatchedData = [
-  {
-    imdbID: "tt1375666",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-    runtime: 148,
-    imdbRating: 8.8,
-    userRating: 10,
-  },
-  {
-    imdbID: "tt0088763",
-    Title: "Back to the Future",
-    Year: "1985",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-    runtime: 116,
-    imdbRating: 8.5,
-    userRating: 9,
-  },
-];
-
-const Main = ({ movies }) => {
-  const [watched, setWatched] = useState(tempWatchedData);
+const Main = ({ movies, error, isLoading, selectedId, setSelectedId }) => {
+  const [alreadyExists, setAlreadyExists] = useState(false);
+  const [watchedList, setWatchedList] = useLocalStorage([], 'watched')
   return (
     <main className="main">
-      <Box element={<MovieList movies={movies} />} />
+      {/* <Box element={<MovieList movies={movies} />} />
       <Box
         element={
           <>
@@ -41,14 +22,40 @@ const Main = ({ movies }) => {
             <WatchedMovieList watched={watched} />
           </>
         }
-      />
-      {/* <Box>
-        <MovieList movies={movies} />
+      /> */}
+      <Box>
+        {isLoading && <Loading />}
+        {!isLoading && !error && (
+          <MovieList
+            movies={movies}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+          />
+        )}
+        {error && <Error message={error} />}
       </Box>
       <Box>
-        <WatchedSummary watched={watched} />
-        <WatchedMovieList watched={watched} />
-      </Box> */}
+        {selectedId ? (
+          <MovieDetails
+            key={selectedId}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+            alreadyExists={alreadyExists}
+            setAlreadyExists={setAlreadyExists}
+            watchedList={watchedList}
+            setWatchedList={setWatchedList}
+          />
+        ) : (
+          <>
+            <WatchedSummary watchedList={watchedList} />
+            <WatchedMovieList
+              watchedList={watchedList}
+              setWatchedList={setWatchedList}
+              setSelectedId={setSelectedId}
+            />
+          </>
+        )}
+      </Box>
     </main>
   );
 };

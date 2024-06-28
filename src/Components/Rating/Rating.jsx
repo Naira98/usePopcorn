@@ -2,12 +2,24 @@ import { useEffect, useState } from "react";
 import "./rating.css";
 import Stars from "../Stars/Stars";
 
-const Rating = ({ maxRating = 5 }) => {
-  const [rating, setRating] = useState(0);
+const Rating = ({
+  userRating,
+  setUserRating,
+  maxRating = 10,
+  color = "#fcc419",
+  size = 18,
+}) => {
   const [tempRating, setTempRating] = useState(0);
 
+  const textStyles = {
+    color,
+    fontSize: `${size}px`,
+    fontFamily: "sans-serif",
+    fontWeight: "400",
+  };
+
   const handleClick = (i) => {
-    setRating(i + 1);
+    setUserRating(i + 1);
   };
   const handleMouseEnter = (i) => {
     setTempRating(i + 1);
@@ -21,14 +33,15 @@ const Rating = ({ maxRating = 5 }) => {
         {Array.from({ length: Number(maxRating) }, (_, i) => (
           <Stars
             key={i}
-            full={tempRating ? tempRating > i : rating > i}
+            full={tempRating ? tempRating > i : userRating > i}
             onRate={() => handleClick(i)}
             onHoverIn={() => handleMouseEnter(i)}
             onHoverOut={() => handleMouseLeave(i)}
+            color={color}
           />
         ))}
       </div>
-      <span>{tempRating || rating || ""}</span>
+      <span style={textStyles}>{tempRating || userRating || ""}</span>
     </div>
   );
 };
