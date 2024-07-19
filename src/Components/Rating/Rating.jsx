@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./rating.css";
 import Stars from "../Stars/Stars";
 
@@ -24,7 +24,7 @@ const Rating = ({
   const handleMouseEnter = (i) => {
     setTempRating(i + 1);
   };
-  const handleMouseLeave = (i) => {
+  const handleMouseLeave = () => {
     setTempRating(0);
   };
   return (

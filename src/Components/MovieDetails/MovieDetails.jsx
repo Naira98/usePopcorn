@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+
 import Rating from "../Rating/Rating";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 import "./movieDetails.css";
+
 import useKey from "../../Hooks/useKey";
 
 const MovieDetails = ({
@@ -45,7 +47,7 @@ const MovieDetails = ({
       setAlreadyExists(true);
       setUserRating(movie.userRating);
     }
-  }, [watchedList, selectedId]);
+  }, [watchedList, selectedId, setAlreadyExists]);
 
   useEffect(() => {
     const fetchDetails = async () => {

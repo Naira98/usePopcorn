@@ -48,7 +48,7 @@ const useMovies = (query, setSelectedId) => {
       controller.abort();
       // canceled = true;
     };
-  }, [query]);
+  }, [query, setSelectedId]);
   return {movies, error, isLoading};
 };
 

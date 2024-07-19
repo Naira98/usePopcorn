@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { useState } from "react";
+
 import Main from "./Components/Main/Main";
 import Navbar from "./Components/Navbar/Navbar";
+import "./App.css";
+
 import useMovies from "./Hooks/useMovies";
 
 

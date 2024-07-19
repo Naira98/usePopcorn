@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 import Box from "../Box/Box";
 import WatchedSummary from "../WatchedSummary/WatchedSummary";
 import WatchedMovieList from "../WatchedMovieList/WatchedMovieList";
 import MovieList from "../MovieList/MovieList";
 import Loading from "../Loading/Loading";
-import Error from "../Error/Error";
 import MovieDetails from "../MovieDetails/MovieDetails";
+import Error from "../Error/Error";
 import "./main.css";
+
 import useLocalStorage from "../../Hooks/useLocalStorage";
 
 const Main = ({ movies, error, isLoading, selectedId, setSelectedId }) => {
